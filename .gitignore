@@ -1,0 +1,51 @@
+# ============================================================
+# .NET / WPF — Visual Studio
+# ============================================================
+
+# Estado local del runtime Pi
+.atl/
+
+# Índice local de CodeGraph
+.codegraph/
+
+# Build artifacts
+[Bb]in/
+[Oo]bj/
+*_wpftmp.csproj
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# NuGet
+*.nupkg
+*.snupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+# Logs técnicos y operativos (nunca van al repo)
+Logs/
+*.log
+
+# Estado y configuración operativa persistida por el servicio (runtime)
+estado.json
+configuracion-operativa.json
+config.json
+credenciales.dat
+
+# Configuración con credenciales (secretos fuera del repo)
+appsettings.*.json
+
+# Excel operativo generado por el bot
+*.xlsx
+
+# Resultados de pruebas
+[Tt]est[Rr]esult*/
+
+# Archivos temporales del sistema operativo
+Thumbs.db
+.DS_Store
+Desktop.ini

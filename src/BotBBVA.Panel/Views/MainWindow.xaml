@@ -1,0 +1,95 @@
+<ui:FluentWindow x:Class="BotBBVA.Panel.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+        xmlns:conv="clr-namespace:BotBBVA.Panel.Converters"
+        xmlns:views="clr-namespace:BotBBVA.Panel.Views"
+        Title="BBVA · Bot de Avalúos"
+        Width="1360" Height="860"
+        MinWidth="1180" MinHeight="760"
+        WindowStartupLocation="CenterScreen"
+        WindowBackdropType="Mica"
+        ExtendsContentIntoTitleBar="True">
+
+    <ui:FluentWindow.Resources>
+        <conv:EnumToBrushConverter x:Key="EnumToBrush"/>
+        <conv:BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <conv:BoolToAppearanceConverter x:Key="BoolToAppearance"/>
+    </ui:FluentWindow.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Barra de título -->
+        <ui:TitleBar Grid.Row="0" Title="BBVA · Bot de Avalúos">
+            <ui:TitleBar.Icon>
+                <ui:ImageIcon Source="pack://application:,,,/Assets/logoBBVA.png" Width="48" Height="20"/>
+            </ui:TitleBar.Icon>
+        </ui:TitleBar>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Navegación lateral -->
+            <Border Grid.Column="0" Width="224"
+                    Background="{DynamicResource CardBackgroundFillColorDefaultBrush}">
+                <DockPanel>
+                    <StackPanel DockPanel.Dock="Bottom" Margin="16,12">
+                        <TextBlock Text="v0.6 · Fase 1 (simulado)"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                   FontSize="11"/>
+                    </StackPanel>
+
+                    <StackPanel Margin="12,16,12,0">
+                        <TextBlock Text="NAVEGACIÓN"
+                                   Foreground="{DynamicResource TextFillColorTertiaryBrush}"
+                                   FontSize="11" FontWeight="SemiBold" Margin="12,0,12,8"/>
+
+                        <ui:Button Content="Panel principal"
+                                   Icon="{ui:SymbolIcon Home24}"
+                                   Appearance="{Binding MostrarPanelPrincipal, Converter={StaticResource BoolToAppearance}}"
+                                   HorizontalAlignment="Stretch"
+                                   HorizontalContentAlignment="Left"
+                                   Command="{Binding MostrarPanelPrincipalCommand}"/>
+
+                        <ui:Button Content="Configuración"
+                                   Icon="{ui:SymbolIcon Settings24}"
+                                   Appearance="{Binding MostrarConfiguracion, Converter={StaticResource BoolToAppearance}}"
+                                   HorizontalAlignment="Stretch"
+                                   HorizontalContentAlignment="Left"
+                                   Command="{Binding MostrarConfiguracionCommand}"
+                                   Margin="0,4,0,0"/>
+                    </StackPanel>
+                </DockPanel>
+            </Border>
+
+            <!-- Contenido -->
+            <Grid Grid.Column="1">
+                <views:PanelPrincipalView Visibility="{Binding MostrarPanelPrincipal, Converter={StaticResource BoolToVis}}"/>
+                <views:ConfiguracionView Visibility="{Binding MostrarConfiguracion, Converter={StaticResource BoolToVis}}"/>
+
+                <!-- Marca de agua: logo BBVA de fondo -->
+                <Image Source="pack://application:,,,/Assets/logoBBVA.png"
+                       Width="720"
+                       Opacity="0.07"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
+                       IsHitTestVisible="False">
+                    <Image.OpacityMask>
+                        <RadialGradientBrush>
+                            <GradientStop Color="White" Offset="0.5"/>
+                            <GradientStop Color="Transparent" Offset="1"/>
+                        </RadialGradientBrush>
+                    </Image.OpacityMask>
+                </Image>
+            </Grid>
+        </Grid>
+    </Grid>
+</ui:FluentWindow>
